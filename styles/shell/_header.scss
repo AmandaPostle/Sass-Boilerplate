@@ -1,0 +1,16 @@
+/* -----------------------------------------------
+   Header
+----------------------------------------------- */
+
+
+// Menu Toggle
+#menu-toggle {
+  padding:0;
+  margin:0;
+  background:none;
+  border:none;
+  &:hover, &:focus, &:active {
+    background:none;
+    border:none;
+  }
+}
