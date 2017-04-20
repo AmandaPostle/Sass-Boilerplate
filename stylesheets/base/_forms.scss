@@ -45,7 +45,7 @@ input[type="search"] {
   height:46px;
   overflow: hidden;
   background:#fff;
-  border:1px solid $base-form-color;;
+  border:1px solid $base-form-color;
 
   &:before {
     content:"";
@@ -61,7 +61,7 @@ input[type="search"] {
     padding:22px;
     background:url(../images/select-arrow.svg) no-repeat center center;
     background-size:17px 12px;
-    border:1px solid $base-form-color;;
+    border:1px solid $base-form-color;
   }
   
   select {
@@ -87,7 +87,7 @@ select:-moz-focusring { // fix for Firefox selectbox dotted line
   text-shadow: 0 0 0 #000;
 }
 
-// Gravity Forms Site Wide
+// Gravity Forms Site Wide (if applicable)
 .gform_wrapper {
   ul, li {
     margin:0;
@@ -101,5 +101,49 @@ select:-moz-focusring { // fix for Firefox selectbox dotted line
   }
   .ginput_full {
     @include clearfix();
+  }
+}
+
+
+// Stylized Checkboxes
+// Can remove if not using.
+.custom-checkboxes {
+  input[type="checkbox"] {
+    z-index: 20;
+    position:absolute;
+    right:15px;
+    top:13px;
+    width:25px;
+    height:25px;
+    opacity:0;
+    cursor:pointer;
+  }
+
+  span {
+    position:relative;
+    display:block;
+    color:$base-link;
+    @include font-size(16px);
+    font-weight: 500;
+    padding-right:35px;
+
+    &:before, &:after {
+      content:"";
+      position:absolute;
+      right:0;
+      top:6px;
+      width:16px;
+      height:16px;
+    }
+
+    &:before {
+      display:block;
+      border:2px solid $brand-color;
+      
+    }
+    &:after {
+      display:none;
+      background:$brand-color;
+    }
   }
 }

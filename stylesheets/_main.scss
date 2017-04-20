@@ -1,0 +1,23 @@
+$output-bourbon-deprecation-warnings: false;
+
+/* Variables/Libraries */
+@import 'bourbon';
+@import 'base/variables';
+@import 'base/mixins';
+@import 'base/grid';
+@import 'neat';
+
+/* Core Resets and Constants: */
+@import 'base/typography';
+@import 'base/forms';
+@import 'base/symbols'; // Icon fonts auto generated through Gulp
+@import 'base/layout';
+
+
+/* Layout & Major Regions */
+@import 'shell/header';
+@import 'shell/footer';
+@import 'shell/page-header';
+
+/* Specific Pages & Components */
+@import 'components/_temp-styles';

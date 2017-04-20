@@ -1,0 +1,176 @@
+/* -----------------------------------------------
+   Mixins
+----------------------------------------------- */
+
+// Converting px to rem (IE8 fallback)
+@mixin font-size($size) {
+  font-size: $size;
+  font-size: rem($size);
+}
+
+// Absolute Centering & Framing:
+@mixin centerX() {
+  position: relative;
+  left: 50%;
+  @include transform( translateX(-50%) );
+}
+
+@mixin centerY() {
+  position: relative;
+  top: 50%;
+  @include transform( translateY(-50%) );
+}
+
+@mixin centerXY() {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  @include transform( translate(-50%, -50%) );
+}
+
+@mixin trbl( $top: 0, $right: $top, $bottom: $top, $left: $right ) {
+  top: $top;
+  right: $right;
+  bottom: $bottom;
+  left: $left;
+}
+
+// Bootstrap-style variable width '.container'
+@mixin vw-container( $max-width: $screen-md, $base-padding: 20px ) {
+  padding: 0 $base-padding;
+  @include outer-container;
+  @include media($min-xs) { max-width: 100%; }
+  @include media($min-sm) { max-width: 100%; }
+  @include media($min-md) { max-width: min( $max-width, $screen-md ); }
+  @include media($min-lg) { max-width: min( $max-width, $screen-lg ); }
+}
+
+@mixin omega-reset($nth) {
+  &:nth-child(#{$nth}) { margin-right: flex-gutter(); }
+  &:nth-child(#{$nth}+1) { clear: none }
+}
+
+@mixin remove-container() {
+  padding: 0;
+  @include outer-container;
+  @include media($min-xs) { max-width: none; }
+  @include media($min-sm) { max-width: none; }
+  @include media($min-md) { max-width: none; }
+  @include media($min-lg) { max-width: none; }
+}
+
+
+// By default, you cannot change settings for bullet styling. 
+// The below mixins will allow it:
+
+// Unordered List Custom Styles
+@mixin ul-custom($top, $bullet-size, $bg) {
+  list-style:none;
+  padding:0;
+  margin:0;
+
+  li {
+    position:relative;
+    padding-left:15px;
+    padding:0 0 15px 15px;
+
+    &:before {
+      content:'';   
+      display:block;
+      position:absolute;
+      left:0;
+      top:$top;
+      width:$bullet-size; 
+      height:$bullet-size; 
+      border-radius:100%; 
+      background:$bg;
+    }
+
+    ul {
+      list-style:none;
+      li {
+        &:first-child {
+          padding-top:15px;
+          &:before {
+            top:calc( 15px + #{$top} );
+          }
+        }
+        &:last-child {
+          padding-bottom:0;
+        }
+      }
+    }
+  }
+}
+
+// Ordered List Special Styles
+@mixin ol-custom($number-color, $number-width) {
+  counter-reset: i 0;
+  list-style:none;
+  padding:0;
+  margin:0;
+
+  li {
+    position:relative;
+    padding:0 0 15px 35px;
+
+    &:before {
+      position:absolute;
+      left:0;
+      top:0;
+      content: counter(i) ".";
+      counter-increment: i;
+      color:$number-color;
+      text-align:right;
+      width:$number-width; 
+      /* Width is added so smaller and larger numbers 
+         will be right aligned neatly. (Ex: "9." then "10.") */
+    }
+
+    ol {
+      list-style:none;
+    }
+  }
+}
+
+/* -----------------------------------------------
+   Extensions
+----------------------------------------------- */
+
+// Strip all default or custom list styling
+.remove-list-styles {
+  list-style:none;
+  padding:0;
+  margin:0;
+  li {
+    padding:0;
+    
+    &:before {
+      display:none;
+    }
+
+    ul, ol {
+      padding:0;
+      li {
+        &:first-child {
+          padding-top:0;
+        }
+      }
+    }
+  }
+}
+
+// Flex Vertical Centering
+.vertical-center {
+  @include display(flex);
+  @include flex-direction(column);
+  @include justify-content(center);
+  @include align-items(center);
+}
+
+// Background Image Cover
+.bg-cover {
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size:cover;
+}
